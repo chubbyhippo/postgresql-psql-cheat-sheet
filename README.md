@@ -1,8 +1,4 @@
-# postgresql-psql-cheat-sheet
-
-This cheat sheet provides commands and shortcuts for PostgreSQL operations using `psql`, along with backup and restore commands.
-
----
+# PostgreSQL (psql) Cheat Sheet
 
 ## Connecting to Database
 Connect to PostgreSQL using different options:
@@ -15,6 +11,24 @@ psql -p <port>                                  # Specify a custom port
 
 ---
 
+## Running `.sql` Files
+To execute `.sql` files that contain SQL commands, you can use the following:
+
+### Using `psql` Command-Line
+Execute an entire `.sql` file directly via the command line:
+```bash
+psql -U <username> -d <database_name> -f <path_to_sql_file.sql>
+```
+
+### Inside `psql`
+If you're already inside the `psql` interactive terminal:
+```sql
+\i <path_to_sql_file.sql>
+```
+This will execute all the SQL commands from the specified file.
+
+---
+
 ## Basic psql Commands
 - `\?` - Show help for psql commands.
 - `\c <database>` - Connect to a specific database.
@@ -24,6 +38,7 @@ psql -p <port>                                  # Specify a custom port
 - `\ds` - List sequences in the current schema.
 - `\d <table_name>` - Describe the schema of a table.
 - `\d+ <table_name>` - Detailed schema of a table, including size.
+- `\z [object_name]` - Show access privileges for a table/column/schema.
 - `\g` - Execute the previous query.
 - `\x` - Toggle expanded output.
 - `\timing` - Show the execution time of queries.
@@ -241,16 +256,6 @@ JOIN orders o ON u.id = o.user_id;
 ### Aggregate Functions
 ```sql
 SELECT COUNT(*), AVG(price) FROM products WHERE category = 'Electronics';
-```
-
-### List All Schemas
-```bash
-\dn
-```
-
-### List All Extensions
-```bash
-\dx
 ```
 
 ---
